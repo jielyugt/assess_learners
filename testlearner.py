@@ -31,8 +31,21 @@ if __name__=="__main__":
     if len(sys.argv) != 2:  		   	  			  	 		  		  		    	 		 		   		 		  
         print("Usage: python testlearner.py <filename>")  		   	  			  	 		  		  		    	 		 		   		 		  
         sys.exit(1)  		   	  			  	 		  		  		    	 		 		   		 		  
-    inf = open(sys.argv[1])  		   	  			  	 		  		  		    	 		 		   		 		  
-    data = np.array([list(map(float,s.strip().split(','))) for s in inf.readlines()])  		   	  			  	 		  		  		    	 		 		   		 		  
+    inf = open(sys.argv[1])
+
+
+    # deleted by Jie
+    # data = np.array([list(map(float,s.strip().split(','))) for s in inf.readlines()])  	
+
+    # added by Jie
+    data = np.array([list(map(str,s.strip().split(','))) for s in inf.readlines()])
+
+    # added by Jie
+    if sys.argv[1] == "Data/Istanbul.csv":
+        data = data[1:,1:]	
+
+    # added by Jie
+    data = data.astype('float') 	 		  		  		    	 		 		   		 		  
   		   	  			  	 		  		  		    	 		 		   		 		  
     # compute how much of the data is training and testing  		   	  			  	 		  		  		    	 		 		   		 		  
     train_rows = int(0.6* data.shape[0])  		   	  			  	 		  		  		    	 		 		   		 		  
