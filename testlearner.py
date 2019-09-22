@@ -35,10 +35,15 @@ if __name__=="__main__":
     inf = open(sys.argv[1])
 
 
+    # change the leaner here!!!!!!!!
     # select the learner to test
-    #learner = lrl.LinRegLearner(verbose = True)
-    learner = dtl.DTLearner(verbose = True)
+    choose = 2
 
+    switcher = {
+        1: lrl.LinRegLearner(verbose = True),
+        2: dtl.DTLearner(verbose = True)
+    }
+    learner = switcher[choose]
 
 
     # deleted by Jie
