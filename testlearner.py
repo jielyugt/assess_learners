@@ -24,7 +24,8 @@ GT honor code violation.
   		   	  			  	 		  		  		    	 		 		   		 		  
 import numpy as np  		   	  			  	 		  		  		    	 		 		   		 		  
 import math  		   	  			  	 		  		  		    	 		 		   		 		  
-import LinRegLearner as lrl  		   	  			  	 		  		  		    	 		 		   		 		  
+import LinRegLearner as lrl  
+import DTLearner as dtl		   	  			  	 		  		  		    	 		 		   		 		  
 import sys  		   	  			  	 		  		  		    	 		 		   		 		  
   		   	  			  	 		  		  		    	 		 		   		 		  
 if __name__=="__main__":  		   	  			  	 		  		  		    	 		 		   		 		  
@@ -32,6 +33,12 @@ if __name__=="__main__":
         print("Usage: python testlearner.py <filename>")  		   	  			  	 		  		  		    	 		 		   		 		  
         sys.exit(1)  		   	  			  	 		  		  		    	 		 		   		 		  
     inf = open(sys.argv[1])
+
+
+    # select the learner to test
+    #learner = lrl.LinRegLearner(verbose = True)
+    learner = dtl.DTLearner(verbose = True)
+
 
 
     # deleted by Jie
@@ -61,7 +68,7 @@ if __name__=="__main__":
     print(f"{testY.shape}")  		   	  			  	 		  		  		    	 		 		   		 		  
   		   	  			  	 		  		  		    	 		 		   		 		  
     # create a learner and train it  		   	  			  	 		  		  		    	 		 		   		 		  
-    learner = lrl.LinRegLearner(verbose = True) # create a LinRegLearner  		   	  			  	 		  		  		    	 		 		   		 		  
+    #learner = lrl.LinRegLearner(verbose = True) # create a LinRegLearner  		   	  			  	 		  		  		    	 		 		   		 		  
     learner.addEvidence(trainX, trainY) # train it  		   	  			  	 		  		  		    	 		 		   		 		  
     print(learner.author())  		   	  			  	 		  		  		    	 		 		   		 		  
   		   	  			  	 		  		  		    	 		 		   		 		  
