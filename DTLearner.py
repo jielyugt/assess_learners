@@ -60,10 +60,16 @@ class DTLearner(object):
         """  
 
         best_feature_index = 0
-        best_correlation = np.corrcoef(dataX[:,0], dataY)[0,1]
+        best_correlation = -1
 
-        for i in range(1, dataX.shape[1]):
-            correlation = np.corrcoef(dataX[:,i], dataY)[0,1]
+        for i in range(dataX.shape[1]):
+
+            # to avoid np.corrcoef() runtime warning
+            std = np.std(dataX[:,i])
+            if std > 0:
+                correlation = np.corrcoef(dataX[:,i], dataY)[0,1]
+            else:
+                correlation = 0
             if correlation > best_correlation:
                 best_correlation = correlation
                 best_feature_index = i
@@ -78,14 +84,8 @@ class DTLearner(object):
         @return: numpy ndarray, decision tree in tabular format	   	  			  	 		  		  		    	 		 		   		 		  
         """
 
-        
-        # print(dataY.shape)
-        # print(self.leaf_size)
-        # print(dataY)
-        # print(dataX.shape)
-
         # aggregated all the data left into a leaf if leaf_size or fewer entries left
-        if dataX.shape[0] <= self.leaf_size or dataX.shape[1] == 0:
+        if dataX.shape[0] <= self.leaf_size:
             return np.asarray([np.nan, np.mean(dataY), np.nan, np.nan])
         
         if np.all(np.isclose(dataY,dataY[0])):
@@ -95,10 +95,16 @@ class DTLearner(object):
         split_val = np.median(dataX[:,feature_index])
 
         left_mask = dataX[:,feature_index] <= split_val
+        # make a leaf to prevent infinite recursion
+        if np.all(np.isclose(left_mask,left_mask[0])):
+            return np.asarray([np.nan, np.mean(dataY), np.nan, np.nan])
+
         right_mask = np.logical_not(left_mask)
 
-        # delete the column
+        """
+        # not correct! we should not delete a column becasue we can ask it again
         dataX = np.delete(dataX, feature_index, 1)
+        """
 
         left_tree = self.build_tree(dataX[left_mask], dataY[left_mask])
 
