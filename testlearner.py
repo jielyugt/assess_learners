@@ -350,14 +350,14 @@ if __name__=="__main__":
     ### report
 
     # run on Istanbul.csv
-    # question_1(trainX, trainY, testX, testY)
-    # question_2(trainX, trainY, testX, testY)
-    # question_3_2(trainX, trainY, testX, testY)
-    # question_3_3(trainX, trainY, testX, testY)
+    question_1(trainX, trainY, testX, testY)
+    question_2(trainX, trainY, testX, testY)
+    question_3_2(trainX, trainY, testX, testY)
+    question_3_3(trainX, trainY, testX, testY)
 
 
     # run on winequality-white.csv
-    #question_3_1(trainX, trainY)
+    question_3_1(trainX, trainY)
     question_3_4(trainX, trainY)
 
 
