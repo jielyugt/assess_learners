@@ -25,8 +25,9 @@ GT honor code violation.
 import numpy as np  		   	  			  	 		  		  		    	 		 		   		 		  
 import math  		   	  			  	 		  		  		    	 		 		   		 		  
 import LinRegLearner as lrl  
-import DTLearner as dtl		   	  			  	 		  		  		    	 		 		   		 		  
-import sys  		   	  			  	 		  		  		    	 		 		   		 		  
+import DTLearner as dtl
+import RTLearner as rtl	   	  			  	 		  		  		    	 		 		   		 		  
+import sys	   	  			  	 		  		  		    	 		 		   		 		  
   		   	  			  	 		  		  		    	 		 		   		 		  
 if __name__=="__main__":  		   	  			  	 		  		  		    	 		 		   		 		  
     if len(sys.argv) != 2:  		   	  			  	 		  		  		    	 		 		   		 		  
@@ -41,7 +42,8 @@ if __name__=="__main__":
 
     switcher = {
         1: lrl.LinRegLearner(verbose = True),
-        2: dtl.DTLearner(verbose = True)
+        2: dtl.DTLearner(verbose = True),
+        3: rtl.RTLearner(verbose = True)
     }
     learner = switcher[choose]
 

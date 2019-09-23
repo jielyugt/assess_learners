@@ -1,6 +1,7 @@
-import numpy as np  		   	  			  	 		  		  		    	 		 		   		 		  
+import numpy as np
+import random	   	  			  	 		  		  		    	 		 		   		 		  
   		   	  			  	 		  		  		    	 		 		   		 		  
-class DTLearner(object):  		   	  			  	 		  		  		    	 		 		   		 		  
+class RTLearner(object):  		   	  			  	 		  		  		    	 		 		   		 		  
   		   	  			  	 		  		  		    	 		 		   		 		  
     def __init__(self, leaf_size = 1, verbose = False):  		   	  			  	 		  		  		    	 		 		   		 		  
         self.leaf_size = leaf_size
@@ -18,12 +19,12 @@ class DTLearner(object):
 
         self.tree = self.build_tree(dataX, dataY)
         if self.verbose:
-            print("DTLearner")
+            print("RTLearner")
             print("tree shape: " + str(self.tree.shape))
             print("tree details below")
             print(self.tree)
   		   	  			  	 		  		  		    	 		 		   		 		  
-    def query(self,points):  		   	  			  	 		  		  		    	 		 		   		 		  
+    def query(self,points): 	  			  	 		  		  		    	 		 		   		 		  
         """  		   	  			  	 		  		  		    	 		 		   		 		  
         @summary: Estimate a set of test points given the model we built.  		   	  			  	 		  		  		    	 		 		   		 		  
         @param points: should be a numpy array with each row corresponding to a specific query.  		   	  			  	 		  		  		    	 		 		   		 		  
@@ -51,31 +52,6 @@ class DTLearner(object):
             else:
                 node += int(self.tree[node][3])
         return self.tree[node][1]
-    
-    def get_best_feature(self, dataX, dataY):
-        """  		   	  			  	 		  		  		    	 		 		   		 		  
-        @summary: determine the best feature to split on  		   	  			  	 		  		  		    	 		 		   		 		  
-        @param dataX: numpy ndarray, features of trainning data
-        @param dataY: numpy ndarray, labels of tranning data		   	  			  	 		  		  		    	 		 		   		 		    			  	 		  		  		    	 		 		   		 		  
-        @return: the index of the feature in dataX with the highest correlation with dataY	   	  			  	 		  		  		    	 		 		   		 		  
-        """  
-
-        best_feature_index = 0
-        best_correlation = -1
-
-        for i in range(dataX.shape[1]):
-
-            # to avoid np.corrcoef() runtime warning
-            std = np.std(dataX[:,i])
-            if std > 0:
-                correlation = np.corrcoef(dataX[:,i], dataY)[0,1]
-            else:
-                correlation = 0
-            if correlation > best_correlation:
-                best_correlation = correlation
-                best_feature_index = i
-        return best_feature_index
-
 
     def build_tree(self, dataX, dataY):
         """  		   	  			  	 		  		  		    	 		 		   		 		  
@@ -91,9 +67,12 @@ class DTLearner(object):
         
         if np.all(np.isclose(dataY,dataY[0])):
             return np.asarray([np.nan, dataY[0], np.nan, np.nan])
-
-        feature_index = self.get_best_feature(dataX, dataY)
-        split_val = np.median(dataX[:,feature_index])
+        feature_index = random.randrange(dataX.shape[1])
+        point1, point2 = random.sample(range(dataX.shape[0]), 2)
+        split_val = (dataX[point1][feature_index] + dataX[point2][feature_index]) / 2
+        
+        # print(feature_index, split_val)
+        # print(dataX)
 
         left_mask = dataX[:,feature_index] <= split_val
         # make a leaf to prevent infinite recursion
@@ -102,16 +81,7 @@ class DTLearner(object):
 
         right_mask = np.logical_not(left_mask)
 
-        """
-        # not correct! we should not delete a column becasue we can ask it again
-        dataX = np.delete(dataX, feature_index, 1)
-        """
-
         left_tree = self.build_tree(dataX[left_mask], dataY[left_mask])
-
-        # print("++++++++")
-        # print(left_tree)
-        # print(left_tree.shape)
 
         right_tree = self.build_tree(dataX[right_mask], dataY[right_mask])
 
@@ -125,5 +95,6 @@ class DTLearner(object):
 
 
   		   	  			  	 		  		  		    	 		 		   		 		  
-if __name__=="__main__":  		   	  			  	 		  		  		    	 		 		   		 		  
-    print('not implemented')  	
+if __name__=="__main__":  	
+    random.seed(903329676)	   	  			  	 		  		  		    	 		 		   		 		  
+    print('not implemented')
