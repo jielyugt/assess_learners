@@ -5,7 +5,9 @@ class RTLearner(object):
   		   	  			  	 		  		  		    	 		 		   		 		  
     def __init__(self, leaf_size = 1, verbose = False):  		   	  			  	 		  		  		    	 		 		   		 		  
         self.leaf_size = leaf_size
-        self.verbose = verbose 		   	  			  	 		  		  		    	 		 		   		 		  
+        self.verbose = verbose
+        random.seed(903329676)	   	  			  	 		  		  		    	 		 		   		 		  
+		   	  			  	 		  		  		    	 		 		   		 		  
   		   	  			  	 		  		  		    	 		 		   		 		  
     def author(self):  		   	  			  	 		  		  		    	 		 		   		 		  
         return 'jlyu31'		   	  			  	 		  		  		    	 		 		   		 		  
@@ -96,5 +98,4 @@ class RTLearner(object):
 
   		   	  			  	 		  		  		    	 		 		   		 		  
 if __name__=="__main__":  	
-    random.seed(903329676)	   	  			  	 		  		  		    	 		 		   		 		  
     print('not implemented')

@@ -2,4 +2,4 @@ __pycache__/
 
 points.txt
 comments.txt
-
+*.png
