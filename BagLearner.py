@@ -9,7 +9,7 @@ class BagLearner(object):
 
         self.learners = []
         for i in range(bags):
-            self.learners.append(learner(**kwargs)) 	 		  		  		    	 		 		   		 		  
+            self.learners.append(learner(**kwargs))	 		  		  		    	 		 		   		 		  
  
     def author(self):  		   	  			  	 		  		  		    	 		 		   		 		  
         return 'jlyu31'
