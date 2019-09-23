@@ -23,11 +23,12 @@ GT honor code violation.
 """  		   	  			  	 		  		  		    	 		 		   		 		  
   		   	  			  	 		  		  		    	 		 		   		 		  
 import numpy as np  		   	  			  	 		  		  		    	 		 		   		 		  
-import math  		   	  			  	 		  		  		    	 		 		   		 		  
-import LinRegLearner as lrl  
+import math 	  			  	 		  		  		    	 		 		   		 		  
+import LinRegLearner as lrl
 import DTLearner as dtl
 import RTLearner as rtl
-import BagLearner as bl   	  			  	 		  		  		    	 		 		   		 		  
+import BagLearner as bl
+import InsaneLearner as il	  			  	 		  		  		    	 		 		   		 		  
 import sys	   	  			  	 		  		  		    	 		 		   		 		  
   		   	  			  	 		  		  		    	 		 		   		 		  
 if __name__=="__main__":  		   	  			  	 		  		  		    	 		 		   		 		  
@@ -39,13 +40,14 @@ if __name__=="__main__":
 
     # change the leaner here!!!!!!!!
     # select the learner to test
-    choose = 4
+    choose = 5
 
     switcher = {
         1: lrl.LinRegLearner(verbose = True),
         2: dtl.DTLearner(verbose = True),
         3: rtl.RTLearner(verbose = True),
-        4: bl.BagLearner(learner=rtl.RTLearner,kwargs={"leaf_size":1},bags=20,boost=False,verbose=False)
+        4: bl.BagLearner(learner=rtl.RTLearner,kwargs={"leaf_size":1},bags=20,boost=False,verbose=False),
+        5: il. InsaneLearner(verbose = False)
     }
     learner = switcher[choose]
 
